@@ -1,0 +1,42 @@
+erDiagram
+    VEICULO {
+        INT id PK
+        VARCHAR placa "UNIQUE; NOT_NULL"
+        INT km_atual "NOT_NULL"
+    }
+
+    MOTORISTA {
+        INT id PK "AUTO_INCREMENT"
+        VARCHAR nome "NOT_NULL"
+        VARCHAR matricula "NOT_NULL; UNIQUE"
+        VARCHAR senha "NOT_NULL"
+    }
+
+    VIAGEM {
+        INT id PK "AUTO_INCREMENT"
+        INT idVeiculo FK "NOT_NULL"
+        INT idMotorista FK "NOT_NULL"
+        BOOLEAN status "NOT_NULL"
+        VARCHAR destino "NOT_NULL"
+    }
+
+    CHECK_LIST {
+        INT id PK "AUTO_INCREMENT"
+        INT idViagem FK "NOT_NULL"
+        DATETIME data_hora "NOT_NULL"
+        INT quilometragem "NOT_NULL"
+        CHAR tipo "NOT_NULL"
+        BOOLEAN estado_pneus "NOT_NULL"
+        BOOLEAN estado_farois "NOT_NULL"
+        BOOLEAN estado_parabrisa "NOT_NULL"
+        BOOLEAN estado_nivel_oleo "NOT_NULL"
+        BOOLEAN estado_nivel_agua_radiador "NOT_NULL"
+        BOOLEAN estado_nivel_combustivel "NOT_NULL"
+        BOOLEAN estado_lataria "NOT_NULL"
+        VARCHAR observacoes "NOT_NULL"
+    }
+
+
+    CHECK_LIST |{--|| VIAGEM : "pertence"
+    VIAGEM ||--o{ MOTORISTA : "é realiza"
+    VIAGEM o{--|| VEICULO : "possui"
